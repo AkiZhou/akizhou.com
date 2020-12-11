@@ -7,7 +7,7 @@ function animateSprite() {
     const height = width * 0.32;
 
     const interval = 100;  // 100ms interval = 10 fps
-    const numFrames = 35;
+    const numFrames = 36;
     var frame = 2;  // Frame starts from 2 because the first one is loaded by CSS
     var position = height;
 
@@ -27,21 +27,29 @@ function animateSprite() {
     }, interval);
 }
 
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 
 /***** MAIN *****/
+sleep(3500).then(() => {
 
-// Keep copyright year up to date
-document.getElementById("year").innerHTML = new Date().getFullYear();
+    // Keep copyright year up to date
+    document.getElementById("year").innerHTML = new Date().getFullYear();
 
-// Animate sign
-document.getElementById("sign").addEventListener("click", animateSprite);
-animateSprite();  // Animate once when opening the page
+    // Animate sign
+    document.getElementById("sign").addEventListener("click", animateSprite);
+    animateSprite();  // Animate once when opening the page
 
-// Reanimate every time window is resized
-window.addEventListener("resize", resized);
+    // Reanimate every time window is resized
+    window.addEventListener("resize", resized);
 
-var resizeWatcher;
-function resized() {
-    clearTimeout(resizeWatcher);
-    resizeWatcher = setTimeout(animateSprite, 1500)
-}
+    var resizeWatcher;
+    function resized() {
+        clearTimeout(resizeWatcher);
+        resizeWatcher = setTimeout(animateSprite, 1500)
+    }
+
+});
+
